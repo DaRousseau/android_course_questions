@@ -19,5 +19,24 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO
         // Your code goes here
+        Button resetButton = findViewById(R.id.buttonResetId);
+        resetButton.setOnClickListener( (click) -> {
+            mCounter = 0;
+            counterView.setText(String.valueOf(mCounter));
+        });
+
+        Button incrementButton = findViewById(R.id.buttonIncId);
+        incrementButton.setOnClickListener( (click) -> {
+            mCounter += 1;
+            counterView.setText("");
+            counterView.setText(String.valueOf(mCounter));
+        });
+
+        Button decrementButton = findViewById(R.id.buttonDecId);
+        decrementButton.setOnClickListener( (click) -> {
+            mCounter -= 1;
+            counterView.setText("");
+            counterView.setText(String.valueOf(mCounter));
+        });
     }
 }
