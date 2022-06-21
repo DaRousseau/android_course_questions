@@ -2,6 +2,8 @@ package com.college.quiz1_question;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
         mShareTextEditText = findViewById(R.id.share_edittext);
         mDialEditText = findViewById(R.id.phone_edittext);
 
+        Button websiteButton = findViewById(R.id.open_website_button);
+        websiteButton.setOnClickListener( (click) -> {
+            openWebsite(websiteButton);
+        });
+
+        Button locationButton = findViewById(R.id.open_location_button);
+        locationButton.setOnClickListener( (click) -> {
+            openLocation(locationButton);
+        });
     }
 
     // TODO
@@ -40,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void openWebsite(View view) {
+        String website = mWebsiteEditText.getText().toString();
+        Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
+        websiteIntent.setData(Uri.parse(website));
+        startActivity(websiteIntent);
     }
 
     // TODO
@@ -52,13 +67,15 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void openLocation(View view) {
-
+        String location = mLocationEditText.getText().toString();
+        Intent locationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(location));
+        startActivity(locationIntent);
     }
 
     // TODO
     /**
      * Handles the onClick for the "Share This Text" button.  The
-     * implicit intent here is created by the  {@link ShareCompat.IntentBuilder}
+     * implicit intent here is created by the  {@link}
      * class.  An app chooser appears with the available options for sharing.
      *
      * ShareCompat.IntentBuilder is from the v4 Support Library.
