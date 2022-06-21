@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         // Display should be prefixed with the '$' sign such as $15
         // Reset should clear all the fields
 
+        /* Get the amount in the EditText, multiply the amount by 5, and set the result
+           into the TextView
+         */
         Button payButton = findViewById(R.id.btnPayId);
         payButton.setOnClickListener( (click) -> {
             String stringAmount = numberStr.getText().toString();
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             resultTv.setText("$" + result);
         });
 
+        /* Clear all fields/views if the user clicks on the clear button */
         Button clearButton = findViewById(R.id.btnResetId);
         clearButton.setOnClickListener( (click) -> {
             numberStr.setText("");
