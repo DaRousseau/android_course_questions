@@ -30,5 +30,18 @@ public class MainActivity extends AppCompatActivity {
         // Display should be prefixed with the '$' sign such as $15
         // Reset should clear all the fields
 
+        Button payButton = findViewById(R.id.btnPayId);
+        payButton.setOnClickListener( (click) -> {
+            String stringAmount = numberStr.getText().toString();
+            int amount = Integer.parseInt(stringAmount);
+            int result = amount * 5;
+            resultTv.setText("$" + result);
+        });
+
+        Button clearButton = findViewById(R.id.btnResetId);
+        clearButton.setOnClickListener( (click) -> {
+            numberStr.setText("");
+            resultTv.setText("");
+        });
     }
 }
