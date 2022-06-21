@@ -40,6 +40,26 @@ public class MainActivity extends AppCompatActivity {
         mColor = ContextCompat.getColor(this, R.color.default_background);
         mPreferences = getSharedPreferences(mSharedPrefFile, MODE_PRIVATE);
 
+        Button countButton = findViewById(R.id.count_button);
+        countButton.setOnClickListener( (click) -> {
+            countUp(countButton);
+        });
+
+        Button resetButton = findViewById(R.id.reset_button);
+        resetButton.setOnClickListener( (click) -> {
+            reset(resetButton);
+        });
+
+        Button saveButton = findViewById(R.id.save_button);
+        saveButton.setOnClickListener( (click) -> {
+            savePrefs(saveButton);
+        });
+
+        Button restoreButton = findViewById(R.id.start_activity_button);
+        restoreButton.setOnClickListener( (click) -> {
+            restaurePrefs(restoreButton);
+        });
+
     }
 
     /**
@@ -64,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void countUp(View view) {
+        mCount += 1;
+        mShowCountTextView.setText("" + mCount);
     }
 
     //TODO 2
@@ -76,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void reset(View view) {
+        mCount = 0;
+        mColor = ContextCompat.getColor(this, R.color.default_background);
+        mShowCountTextView.setBackgroundColor(mColor);
+        mShowCountTextView.setText("" + mCount);
+        SharedPreferences.Editor removeStuff = mPreferences.edit();
+        removeStuff.remove(COLOR_KEY);
+        removeStuff.remove(COUNT_KEY);
+        removeStuff.commit();
     }
 
     //TODO 3
@@ -86,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void savePrefs(View view) {
+        SharedPreferences.Editor saveStuff = mPreferences.edit();
+        saveStuff.putInt(COLOR_KEY, mColor);
+        saveStuff.putInt(COUNT_KEY, mCount);
+        saveStuff.commit();
     }
 
     //TODO 4
@@ -97,6 +131,10 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view (Button) that was clicked.
      */
     public void restaurePrefs(View view) {
+        mColor = mPreferences.getInt(COLOR_KEY, ContextCompat.getColor(this, R.color.default_background));
+        mCount = mPreferences.getInt(COUNT_KEY, 0);
+        mShowCountTextView.setBackgroundColor(mColor);
+        mShowCountTextView.setText("" + mCount);
     }
 
 }
